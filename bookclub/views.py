@@ -14,12 +14,10 @@ from bookclub.models import Book
 def all_books(request):
     # retrieve all records of the Book model
     books = Book.objects.all()
-    upcoming_books = Book.objects.filter(read_by__gte=date.today()).order_by("read_by")[
-        :3
-    ]
-    previous_books = Book.objects.filter(read_by__lt=date.today()).order_by("-read_by")[
-        :3
-    ]
+    upcoming_books = Book.objects.filter(
+        read_by__gte=date.today()).order_by("read_by")[:3]
+    previous_books = Book.objects.filter(
+        read_by__lt=date.today()).order_by("-read_by")[:3]
     return render(
         request,
         "bookclub/all_books.html",
