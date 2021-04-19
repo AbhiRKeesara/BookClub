@@ -1,7 +1,9 @@
 from datetime import date
 
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
 
 from bookclub.forms import DiscussionForm
 from bookclub.models import Book
