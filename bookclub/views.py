@@ -1,8 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from datetime import date
+
 from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
+
 from bookclub.forms import DiscussionForm
 from bookclub.models import Book
-from datetime import date
 
 # Create your views here.
 
@@ -10,12 +14,10 @@ from datetime import date
 def all_books(request):
     # retrieve all records of the Book model
     books = Book.objects.all()
-    upcoming_books = Book.objects.filter(read_by__gte=date.today()).order_by("read_by")[
-        :3
-    ]
-    previous_books = Book.objects.filter(read_by__lt=date.today()).order_by("-read_by")[
-        :3
-    ]
+    upcoming_books = Book.objects.filter(
+        read_by__gte=date.today()).order_by("read_by")[:3]
+    previous_books = Book.objects.filter(
+        read_by__lt=date.today()).order_by("-read_by")[:3]
     return render(
         request,
         "bookclub/all_books.html",

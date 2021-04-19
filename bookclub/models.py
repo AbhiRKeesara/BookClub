@@ -13,10 +13,10 @@ class Book(models.Model):
 
 
 class Discussion(models.Model):
-    book = models.ForeignKey(
-        "bookclub.Book", related_name="discussion", on_delete=models.CASCADE
-    )
-    author = models.ForeignKey(
-        "auth.User", related_name="records", on_delete=models.CASCADE
-    )
+    book = models.ForeignKey("bookclub.Book",
+                             related_name="discussion",
+                             on_delete=models.CASCADE)
+    author = models.ForeignKey("auth.User",
+                               related_name="records",
+                               on_delete=models.CASCADE)
     opinion = models.TextField()
