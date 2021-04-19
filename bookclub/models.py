@@ -10,3 +10,13 @@ class Book(models.Model):
     book = models.CharField(max_length=100)
     description = models.TextField()
     read_by = models.DateField()
+
+
+class Discussion(models.Model):
+    book = models.ForeignKey("bookclub.Book",
+                             related_name="discussion",
+                             on_delete=models.CASCADE)
+    author = models.ForeignKey("auth.User",
+                               related_name="records",
+                               on_delete=models.CASCADE)
+    opinion = models.TextField()
