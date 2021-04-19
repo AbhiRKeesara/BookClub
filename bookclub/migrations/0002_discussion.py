@@ -16,10 +16,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Discussion',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                                           primary_key=True, serialize=False, verbose_name='ID')),
                 ('opinion', models.TextField()),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='records', to=settings.AUTH_USER_MODEL)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='discussion', to='bookclub.book')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                             related_name='records', to=settings.AUTH_USER_MODEL)),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                           related_name='discussion', to='bookclub.book')),
             ],
         ),
     ]
