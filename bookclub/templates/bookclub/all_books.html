@@ -1,0 +1,63 @@
+{% extends 'bookclub/base.html' %}
+
+{% block title %}
+All the books
+{% endblock %}}
+
+{% block content %}
+
+<div class="jumbotron">
+    <p class="lead">What were your thoughts on the latest book?</p>
+    <h3>{{previous_books.0.book}}</h3>
+    <hr class="my-4">
+    <p>{{previous_books.0.description|truncatewords:150}}</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'book_detail' pk=previous_books.0.pk %}" role="button">See the discussion</a>
+</div>
+
+<ul class="nav nav-tabs mb-3" id="allBooks" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming Books</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#previous" role="tab" aria-controls="previous" aria-selected="false">Previous Books</a>
+    </li>
+</ul>
+<div class="tab-content" id="allBooksContent">
+    <div class="tab-pane active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+        <div class="list-group">
+            {% for upcoming_book in upcoming_books %}
+            <a href="{% url 'book_detail' pk=upcoming_book.pk %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        {{ upcoming_book.book }}
+                    </h5>
+                    <small class="text-muted">
+                        Read by: {{ upcoming_book.read_by }}
+                    </small>
+                </div>
+                <p class="mb-1">
+                    {{ upcoming_book.description }}
+                </p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="tab-pane" id="previous" role="tabpanel" aria-labelledby="previous-tab">
+        <div class="list-group">
+            {% for previous_book in previous_books %}
+            <a href="{% url 'book_detail' pk=previous_book.pk %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        {{ previous_book.book }}
+                    </h5>
+                </div>
+                <p class="mb-1">
+                    {{ previous_book.description }}
+                </p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}}

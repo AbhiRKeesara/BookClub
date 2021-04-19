@@ -1,0 +1,55 @@
+{% extends 'bookclub/base.html' %}
+
+{% block title %}
+{{ book.book }}
+{% endblock %}}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        {{ book.description}}
+
+        {% if not discussion_open %}
+        <div class="alert alert-primary mt-4" role="alert">
+            Read this book by: {{book.read_by}}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<a href="{% url 'all_books'%}" class="float-right">Back to all books</a>
+
+<h2 class="mt-5 mb-3">Discussion</h2>
+{% if discussion_open %}
+    <b>What are your thoughts on the book?</b>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ discussion_form.as_table }}
+        <br>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+    {% else %}
+    <div class="alert alert-warning">Only registered users are allowed to post their opinion.</div>
+    {% endif %}
+
+    {% for opinion in book.discussion.all %}
+    <div class="card mt-4">
+      <div class="card-header">
+        {{ opinion.author }}
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ opinion.opinion }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-secondary mt-4" role="alert">
+    There is noo opinions yet for this book.
+    </div>
+    {% endfor %}
+
+{% else %}
+<div class="alert alert-secondary" role="alert">
+    Discussion is not enabled yet for this book.
+</div>
+{% endif %}
+{% endblock %}
