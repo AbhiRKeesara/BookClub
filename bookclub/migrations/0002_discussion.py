@@ -9,20 +9,39 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('bookclub', '0001_initial'),
+        ("bookclub", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Discussion',
+            name="Discussion",
             fields=[
-                ('id', models.BigAutoField(auto_created=True,
-                                           primary_key=True, serialize=False, verbose_name='ID')),
-                ('opinion', models.TextField()),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
-                                             related_name='records', to=settings.AUTH_USER_MODEL)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
-                                           related_name='discussion', to='bookclub.book')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("opinion", models.TextField()),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="records",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="discussion",
+                        to="bookclub.book",
+                    ),
+                ),
             ],
         ),
     ]
